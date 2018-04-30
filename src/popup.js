@@ -9,6 +9,14 @@ function bookTitle(isbn) {
         });
 }
 
+function removeIsbnFromStorage(isbn) {
+    chrome.storage.local.get("isbns", result => {
+        const filtered = result.isbns.filter(entry => entry !== isbn);
+        result.isbns = filtered;
+        chrome.storage.local.set(result);
+    });
+}
+
 function showList() {
     const books = document.getElementById("books");
     [...books.children].forEach(child => child.remove());
@@ -32,6 +40,7 @@ function showList() {
             remove.className = "button is-small fas fa-times";
             remove.onclick = () => {
                 lineColumns.remove();
+                removeIsbnFromStorage(isbn);
             };
             buttonColumn.appendChild(remove);
 
