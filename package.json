@@ -1,0 +1,24 @@
+{
+  "name": "isbn-collector",
+  "version": "1.0.0",
+  "description": "表示されたISBNを集めます",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irof/isbn-collector.git"
+  },
+  "author": "irof",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/irof/isbn-collector/issues"
+  },
+  "homepage": "https://github.com/irof/isbn-collector#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.2",
+    "jest": "^22.4.3"
+  }
+}
