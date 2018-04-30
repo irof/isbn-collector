@@ -21,7 +21,7 @@ function showList() {
 
             const isbnColumn = document.createElement("div");
             isbnColumn.className = "column";
-            isbnColumn.title=isbn;
+            isbnColumn.title = isbn;
             bookTitle(isbn).then(title => {
                 isbnColumn.appendChild(document.createTextNode(title));
             });
@@ -46,7 +46,7 @@ function showList() {
             lineColumns.appendChild(buttonColumn);
         });
     });
-};
+}
 
 document.getElementById("initialize").onclick = () => {
     chrome.storage.local.remove("isbns");
