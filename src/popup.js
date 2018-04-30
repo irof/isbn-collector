@@ -2,33 +2,46 @@ function showList() {
     const books = document.getElementById("books");
     [...books.children].forEach(child => child.remove());
 
-    const ul = document.createElement("ul");
-    books.appendChild(ul);
-
     chrome.storage.local.get("isbns", result => {
         result.isbns.forEach(isbn => {
-            const li = document.createElement("li");
-            li.appendChild(document.createTextNode(isbn + " "));
+            const lineColumns = document.createElement("div");
+            lineColumns.className = "columns is-mobile is-gapless";
+            books.appendChild(lineColumns);
 
-            const link = document.createElement("a");
-            link.href = "https://www.amazon.co.jp/gp/search?field-isbn=" + isbn;
-            link.target = "_blank";
-            link.className = "fab fa-amazon";
-            li.appendChild(link);
+            const isbnColumn = document.createElement("div");
+            isbnColumn.className = "column";
+            isbnColumn.appendChild(document.createTextNode(isbn + " "));
 
-            ul.appendChild(li);
+            const buttonColumn = document.createElement("div");
+            buttonColumn.className = "column is-3";
+            const remove = document.createElement("button");
+            remove.className = "button is-small fas fa-times";
+            remove.onclick = () => {
+                lineColumns.remove();
+            };
+            buttonColumn.appendChild(remove);
+
+            const link = document.createElement("button");
+            link.className = "button is-small is-warning fab fa-amazon";
+            link.onclick = () => {
+                window.open("https://www.amazon.co.jp/gp/search?field-isbn=" + isbn, "_blank");
+            };
+            buttonColumn.appendChild(link);
+
+            lineColumns.appendChild(isbnColumn);
+            lineColumns.appendChild(buttonColumn);
         });
     });
 };
 
-document.getElementById("reload").onclick = showList;
-
 document.getElementById("initialize").onclick = () => {
     chrome.storage.local.remove("isbns");
+    const books = document.getElementById("books");
+    [...books.children].forEach(child => child.remove());
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.body.style.width = "200px";
+    //document.body.style.width = "200px";
 });
 
 showList();
