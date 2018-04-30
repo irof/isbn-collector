@@ -23,4 +23,4 @@ document.getElementById("show").onclick = () => {
             ul.appendChild(li);
         });
     });
-}
+};

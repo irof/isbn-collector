@@ -31,7 +31,7 @@ function collectIsbn(text) {
 const htmlText = document.documentElement.innerHTML;
 
 chrome.storage.local.get("isbns", result => {
-    const isbnSet = new Set(result.isbns)
+    const isbnSet = new Set(result.isbns);
     collectIsbn(htmlText).forEach(isbn => {
         isbnSet.add(isbn);
 
