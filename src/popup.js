@@ -1,8 +1,4 @@
-document.getElementById("initialize").onclick = () => {
-    chrome.storage.local.remove("isbns");
-};
-
-document.getElementById("show").onclick = () => {
+function showList() {
     const books = document.getElementById("books");
     [...books.children].forEach(child => child.remove());
 
@@ -24,3 +20,15 @@ document.getElementById("show").onclick = () => {
         });
     });
 };
+
+document.getElementById("reload").onclick = showList;
+
+document.getElementById("initialize").onclick = () => {
+    chrome.storage.local.remove("isbns");
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.style.width = "200px";
+});
+
+showList();
