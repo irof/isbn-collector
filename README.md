@@ -3,6 +3,10 @@ isbn-collector
 
 ねっとさーふぃん中に見つけたISBNをメモしておいてくれる子です。
 
+## 使ってみる
+
+[Chromeウェブストア](https://chrome.google.com/webstore/detail/isbn-collector/jjjkfbknnpdhaimekmmnendlbeimgiol?hl=ja)から入手できます。
+
 ## メモ
 
 ### ISBNの拾い方
