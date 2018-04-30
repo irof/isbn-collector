@@ -15,12 +15,13 @@ function isISBN13(value) {
 function collectIsbn(text) {
     const isbns = new Set();
 
-    for (const candidate of text.match(/\d{9,}[\dX]/g)) {
-        if (candidate.length == 10) {
-            if (isISBN10(candidate)) isbns.add(candidate);
+    for (const candidate of text.match(/\d[\d-]{8,}[\dX]/g)) {
+        const isbnNumberCandidate = candidate.replace(/-/g, "");
+        if (isbnNumberCandidate.length == 10) {
+            if (isISBN10(isbnNumberCandidate)) isbns.add(isbnNumberCandidate);
         }
-        if (candidate.length == 13) {
-            if (isISBN13(candidate)) isbns.add(candidate);
+        if (isbnNumberCandidate.length == 13) {
+            if (isISBN13(isbnNumberCandidate)) isbns.add(isbnNumberCandidate);
         }
     }
     return Array.from(isbns);
