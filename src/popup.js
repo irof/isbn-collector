@@ -1,5 +1,10 @@
-document.getElementById("reload").onclick = () => {
+document.getElementById("initialize").onclick = () => {
+    chrome.storage.local.remove("isbns");
+};
+
+document.getElementById("show").onclick = () => {
     const books = document.getElementById("books");
+    [...books.children].forEach(child => child.remove());
 
     const ul = document.createElement("ul");
     books.appendChild(ul);

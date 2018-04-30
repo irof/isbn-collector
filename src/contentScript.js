@@ -1,6 +1,7 @@
 function isISBN10(value) {
     if (value.startsWith("4")) {
         // とりあえず日本だけ対象
+        return true;
     }
     return false;
 }
