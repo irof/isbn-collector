@@ -1,10 +1,24 @@
 function isISBN10(value) {
+    // 日本だけ対象
     if (value.startsWith("4")) {
-        // とりあえず日本だけ対象
-        return true;
+        // checkdigitが合うやつだけ
+        return checkdigit10(value);
     }
     return false;
 }
+function checkdigit10(value) {
+    let temp = 0;
+    for (let index = 0; index < 9; index++) {
+        const v = value[index];
+        temp += Number(v) * (10 - index);
+    }
+    const expected = 11 - (temp % 11);
+
+    const actual = value[9];
+    if (expected == 10) return actual === "X";
+    return actual === String(expected);
+}
+
 function isISBN13(value) {
     // とりあえず日本だけ対象
     if (value.startsWith("9784")) {
