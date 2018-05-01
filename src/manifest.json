@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "isbn-collector",
-  "version": "1.2.0",
+  "name": "ISBNこれくたー",
+  "description": "ページに表示されたISBNをメモしておきます。",
+  "version": "1.2.1",
   "icons": {
   },
   "browser_action": {

@@ -1,6 +1,6 @@
 {
   "name": "isbn-collector",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "表示されたISBNを集めます",
   "scripts": {
     "test": "jest"
