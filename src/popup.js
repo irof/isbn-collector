@@ -14,6 +14,12 @@ function removeIsbnFromStorage(isbn) {
         const filtered = result.isbns.filter(entry => entry !== isbn);
         result.isbns = filtered;
         chrome.storage.local.set(result);
+
+        chrome.storage.local.get("ignores", ignoresResult => {
+            if (!ignoresResult.ignores) ignoresResult.ignores = [];
+            ignoresResult.ignores.push(isbn);
+            chrome.storage.local.set(ignoresResult);
+        });
     });
 }
 
@@ -23,25 +29,23 @@ function showList() {
 
     chrome.storage.local.get("isbns", result => {
         result.isbns.forEach(isbn => {
-            const lineColumns = document.createElement("div");
-            lineColumns.className = "columns is-mobile is-gapless";
-            books.appendChild(lineColumns);
+            const line = document.createElement("tr");
+            books.appendChild(line);
 
-            const isbnColumn = document.createElement("div");
-            isbnColumn.className = "column";
+            const isbnColumn = document.createElement("td");
             isbnColumn.title = isbn;
             bookTitle(isbn).then(title => {
                 isbnColumn.appendChild(document.createTextNode(title));
             });
 
-            const buttonColumn = document.createElement("div");
-            buttonColumn.className = "column is-3";
+            const buttonColumn = document.createElement("td");
             const remove = document.createElement("button");
             remove.className = "button is-small fas fa-times";
             remove.onclick = () => {
-                lineColumns.remove();
+                line.remove();
                 removeIsbnFromStorage(isbn);
             };
+            buttonColumn.style = "white-space: nowrap";
             buttonColumn.appendChild(remove);
 
             const link = document.createElement("button");
@@ -51,8 +55,8 @@ function showList() {
             };
             buttonColumn.appendChild(link);
 
-            lineColumns.appendChild(isbnColumn);
-            lineColumns.appendChild(buttonColumn);
+            line.appendChild(isbnColumn);
+            line.appendChild(buttonColumn);
         });
     });
 }
@@ -62,6 +66,9 @@ document.getElementById("initialize").onclick = () => {
     const books = document.getElementById("books");
     [...books.children].forEach(child => child.remove());
 };
+document.getElementById("option").onclick = () => {
+    window.location.href = './option.html';
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     //document.body.style.width = "200px";

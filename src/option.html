@@ -12,20 +12,26 @@
 <body>
   <div class="columns is-overlay">
     <div class="column has-text-right">
-      <button class="button is-small" id="option">対象外リスト</button>
-      <button class="button is-small" id="initialize">クリア</button>
+      <a class="button is-small" href="popup.html">戻る</a>
     </div>
   </div>
   <table class="table is-striped is-fullwidth">
+    <caption>収集対象外のISBN</caption>
     <thead>
-      <th>書名/ISBN?</th>
-      <th></th>
+      <tr>
+        <th>ISBN</th>
+        <th>書名確認</th>
+      </tr>
     </thead>
-    <tbody id="books">
-    </tbody>
+    <tbody id="ignores"></tbody>
   </table>
+  <button class="button is-danger is-fullwidth" id="clearIgnores">対象外をクリアする</button>
 
-  <script src="popup.js"></script>
+  <div class="column">
+    <i class="fas fa-times"></i> を押したものが対象外となります。
+  </div>
+
+  <script src="option.js"></script>
 </body>
 
 </html>

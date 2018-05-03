@@ -27,11 +27,13 @@ function isISBN13(value) {
     return false;
 }
 
-function collectIsbn(text) {
+function collectIsbn(text, ignoreIsbns) {
     const isbns = new Set();
 
     for (const candidate of text.match(/\d[\d-]{8,}[\dX]/g)) {
         const isbnNumberCandidate = candidate.replace(/-/g, "");
+        if (ignoreIsbns && ignoreIsbns.includes(isbnNumberCandidate)) continue;
+
         if (isbnNumberCandidate.length == 10) {
             if (isISBN10(isbnNumberCandidate)) isbns.add(isbnNumberCandidate);
         }
@@ -44,9 +46,9 @@ function collectIsbn(text) {
 
 const htmlText = document.documentElement.innerHTML;
 
-chrome.storage.local.get("isbns", result => {
+chrome.storage.local.get(["isbns", "ignores"], result => {
     const isbnSet = new Set(result.isbns);
-    collectIsbn(htmlText).forEach(isbn => {
+    collectIsbn(htmlText, result.ignores).forEach(isbn => {
         isbnSet.add(isbn);
 
         result.isbns = Array.from(isbnSet);
